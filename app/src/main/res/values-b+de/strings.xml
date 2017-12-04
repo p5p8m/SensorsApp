@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Sensoren</string>
+    <string name="restore">, kann Status restaurieren</string>
+    <string name="sensor_found">Sensor gefunden : </string>
+    <string name="sensor_unknown_type">Unbekannter Typ : </string>
+    <string name="finishing">" Wird beendet"</string>
+    <string name="num_sensors_fmt">%1$d Sensoren wurden gefunden.</string>
+</resources>
