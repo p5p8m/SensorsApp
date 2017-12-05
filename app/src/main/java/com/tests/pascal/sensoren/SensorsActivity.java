@@ -43,6 +43,13 @@ public class SensorsActivity extends Activity {// AppCompatActivity {
         // Notification that the activity will be started
         Log.i(TAG, getMethodName());
     }
+    // Samsung specific sensors as of http://developer.samsung.com/forum/thread/galaxy-s7-built-in-hardware-sensors/201/297805?boardName=SDK&startId=00tZE~&startPage=5&curPage=7
+    public static final int TYPE_SAMSUNG_TILT_DETECTOR_V1 = 22;
+    public static final int TYPE_SCREEN_ORIENTATION_SENSOR_V3  = 65558;
+    public static final int TYPE_GRIP_SENSOR_V512_SEMTECH = 65560;
+    public static final int TYPE_TMD4093_RGB_IR_SENSOR_V1 = 65578;
+    public static final int TYPE_INTERRUPT_GYROSCOPE_SENSOR_V1 = 65579;
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -94,6 +101,12 @@ public class SensorsActivity extends Activity {// AppCompatActivity {
                 case Sensor.TYPE_STEP_DETECTOR: name =  "STEP_DETECTOR"; break;
                 /** @deprecated */
                 case Sensor.TYPE_TEMPERATURE: name =  "TEMPERATURE"; break;
+                /* Samsung Sensors */
+                case TYPE_SAMSUNG_TILT_DETECTOR_V1: name =  "SAMSUNG_TILT_DETECTOR_V1"; break;
+                case TYPE_SCREEN_ORIENTATION_SENSOR_V3: name =  "SCREEN_ORIENTATION_SENSOR_V3"; break;
+                case TYPE_GRIP_SENSOR_V512_SEMTECH: name =  "GRIP_SENSOR_V512_SEMTECH"; break;
+                case TYPE_TMD4093_RGB_IR_SENSOR_V1: name =  "TMD4093_RGB_IR_SENSOR_V1"; break;
+                case TYPE_INTERRUPT_GYROSCOPE_SENSOR_V1: name =  "INTERRUPT_GYROSCOPE_SENSOR_V1"; break;
                 default:
                     name = getString(R.string.sensor_unknown_type) + s.getType();
                     break;
