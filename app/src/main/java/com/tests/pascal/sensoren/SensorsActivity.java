@@ -1,10 +1,7 @@
 package com.tests.pascal.sensoren;
 
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Collections;
-import java.util.ArrayList;
 import java.lang.Object;
 import java.util.Comparator;
 
@@ -20,7 +17,6 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -50,8 +46,8 @@ public class SensorsActivity
     }
 
     private SensorManager sm = null;
-    List<Sensor> sensors = null;
-    SparseArray<String[]> sensorNames;
+    private List<Sensor> sensors = null;
+    private SparseArray<String[]> sensorNames;
     public static final int SENSOR_NUM_COL = 2;
 
     @Override
@@ -79,145 +75,151 @@ public class SensorsActivity
         // Notification that the activity is starting
         Log.i(TAG, getMethodName());
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensors = sm.getSensorList(Sensor.TYPE_ALL);
-        StringBuilder sb = new StringBuilder();
-        Formatter ft = new Formatter(sb);
-        ft.format(getString(R.string.num_sensors_fmt), sensors.size());
-        String numSensorsText = sb.toString();
-        Log.i(TAG, numSensorsText);
-        TextView numSensorsView = (TextView) findViewById(R.id.pa);
-        numSensorsView.setText(numSensorsText);
-        sensorNames = new SparseArray<String[]>(sensors.size());
-        for (Sensor s : sensors) {
-            String name;
-            switch (s.getType()) {
-                case Sensor.TYPE_ACCELEROMETER:
-                    name = "ACCELEROMETER";
-                    break;
-                case Sensor.TYPE_ACCELEROMETER_UNCALIBRATED:
-                    name = "ACCELEROMETER_UNCALIBRATED";
-                    break;
-                case Sensor.TYPE_ALL:
-                    name = "ALL";
-                    break;
-                case Sensor.TYPE_AMBIENT_TEMPERATURE:
-                    name = "AMBIENT_TEMPERATURE";
-                    break;
-                case Sensor.TYPE_DEVICE_PRIVATE_BASE:
-                    name = "DEVICE_PRIVATE_BASE";
-                    break;
-                case Sensor.TYPE_GAME_ROTATION_VECTOR:
-                    name = "GAME_ROTATION_VECTOR";
-                    break;
-                case Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR:
-                    name = "GEOMAGNETIC_ROTATION_VECTOR";
-                    break;
-                case Sensor.TYPE_GRAVITY:
-                    name = "GRAVITY";
-                    break;
-                case Sensor.TYPE_GYROSCOPE:
-                    name = "GYROSCOPE";
-                    break;
-                case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
-                    name = "GYROSCOPE_UNCALIBRATED";
-                    break;
-                case Sensor.TYPE_HEART_BEAT:
-                    name = "HEART_BEAT";
-                    break;
-                case Sensor.TYPE_HEART_RATE:
-                    name = "HEART_RATE";
-                    break;
-                case Sensor.TYPE_LIGHT:
-                    name = "LIGHT";
-                    break;
-                case Sensor.TYPE_LINEAR_ACCELERATION:
-                    name = "LINEAR_ACCELERATION";
-                    break;
-                case Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT:
-                    name = "LOW_LATENCY_OFFBODY_DETECT";
-                    break;
-                case Sensor.TYPE_MAGNETIC_FIELD:
-                    name = "MAGNETIC_FIELD";
-                    break;
-                case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
-                    name = "MAGNETIC_FIELD_UNCALIBRATED";
-                    break;
-                case Sensor.TYPE_MOTION_DETECT:
-                    name = "MOTION_DETECT";
-                    break;
-                /** @deprecated */
-                case Sensor.TYPE_ORIENTATION:
-                    name = "ORIENTATION";
-                    break;
-                case Sensor.TYPE_POSE_6DOF:
-                    name = "POSE_6DOF";
-                    break;
-                case Sensor.TYPE_PRESSURE:
-                    name = "PRESSURE";
-                    break;
-                case Sensor.TYPE_PROXIMITY:
-                    name = "PROXIMITY";
-                    break;
-                case Sensor.TYPE_RELATIVE_HUMIDITY:
-                    name = "RELATIVE_HUMIDITY";
-                    break;
-                case Sensor.TYPE_ROTATION_VECTOR:
-                    name = "ROTATION_VECTOR";
-                    break;
-                case Sensor.TYPE_SIGNIFICANT_MOTION:
-                    name = "SIGNIFICANT_MOTION";
-                    break;
-                case Sensor.TYPE_STATIONARY_DETECT:
-                    name = "STATIONARY_DETECT";
-                    break;
-                case Sensor.TYPE_STEP_COUNTER:
-                    name = "STEP_COUNTER";
-                    break;
-                case Sensor.TYPE_STEP_DETECTOR:
-                    name = "STEP_DETECTOR";
-                    break;
-                /** @deprecated */
-                case Sensor.TYPE_TEMPERATURE:
-                    name = "TEMPERATURE";
-                    break;
+        try {
+            sensors = sm.getSensorList(Sensor.TYPE_ALL);
+            StringBuilder sb = new StringBuilder();
+            Formatter ft = new Formatter(sb);
+            ft.format(getString(R.string.num_sensors_fmt), sensors.size());
+            String numSensorsText = sb.toString();
+            Log.i(TAG, numSensorsText);
+            TextView numSensorsView = findViewById(R.id.pa);
+            numSensorsView.setText(numSensorsText);
+            sensorNames = new SparseArray<>(sensors.size());
+            for (Sensor s : sensors) {
+                String name;
+                switch (s.getType()) {
+                    case Sensor.TYPE_ACCELEROMETER:
+                        name = "ACCELEROMETER";
+                        break;
+                    case Sensor.TYPE_ACCELEROMETER_UNCALIBRATED:
+                        name = "ACCELEROMETER_UNCALIBRATED";
+                        break;
+                    case Sensor.TYPE_ALL:
+                        name = "ALL";
+                        break;
+                    case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                        name = "AMBIENT_TEMPERATURE";
+                        break;
+                    case Sensor.TYPE_DEVICE_PRIVATE_BASE:
+                        name = "DEVICE_PRIVATE_BASE";
+                        break;
+                    case Sensor.TYPE_GAME_ROTATION_VECTOR:
+                        name = "GAME_ROTATION_VECTOR";
+                        break;
+                    case Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR:
+                        name = "GEOMAGNETIC_ROTATION_VECTOR";
+                        break;
+                    case Sensor.TYPE_GRAVITY:
+                        name = "GRAVITY";
+                        break;
+                    case Sensor.TYPE_GYROSCOPE:
+                        name = "GYROSCOPE";
+                        break;
+                    case Sensor.TYPE_GYROSCOPE_UNCALIBRATED:
+                        name = "GYROSCOPE_UNCALIBRATED";
+                        break;
+                    case Sensor.TYPE_HEART_BEAT:
+                        name = "HEART_BEAT";
+                        break;
+                    case Sensor.TYPE_HEART_RATE:
+                        name = "HEART_RATE";
+                        break;
+                    case Sensor.TYPE_LIGHT:
+                        name = "LIGHT";
+                        break;
+                    case Sensor.TYPE_LINEAR_ACCELERATION:
+                        name = "LINEAR_ACCELERATION";
+                        break;
+                    case Sensor.TYPE_LOW_LATENCY_OFFBODY_DETECT:
+                        name = "LOW_LATENCY_OFFBODY_DETECT";
+                        break;
+                    case Sensor.TYPE_MAGNETIC_FIELD:
+                        name = "MAGNETIC_FIELD";
+                        break;
+                    case Sensor.TYPE_MAGNETIC_FIELD_UNCALIBRATED:
+                        name = "MAGNETIC_FIELD_UNCALIBRATED";
+                        break;
+                    case Sensor.TYPE_MOTION_DETECT:
+                        name = "MOTION_DETECT";
+                        break;
+                    /** @deprecated */
+                    case Sensor.TYPE_ORIENTATION:
+                        name = "ORIENTATION";
+                        break;
+                    case Sensor.TYPE_POSE_6DOF:
+                        name = "POSE_6DOF";
+                        break;
+                    case Sensor.TYPE_PRESSURE:
+                        name = "PRESSURE";
+                        break;
+                    case Sensor.TYPE_PROXIMITY:
+                        name = "PROXIMITY";
+                        break;
+                    case Sensor.TYPE_RELATIVE_HUMIDITY:
+                        name = "RELATIVE_HUMIDITY";
+                        break;
+                    case Sensor.TYPE_ROTATION_VECTOR:
+                        name = "ROTATION_VECTOR";
+                        break;
+                    case Sensor.TYPE_SIGNIFICANT_MOTION:
+                        name = "SIGNIFICANT_MOTION";
+                        break;
+                    case Sensor.TYPE_STATIONARY_DETECT:
+                        name = "STATIONARY_DETECT";
+                        break;
+                    case Sensor.TYPE_STEP_COUNTER:
+                        name = "STEP_COUNTER";
+                        break;
+                    case Sensor.TYPE_STEP_DETECTOR:
+                        name = "STEP_DETECTOR";
+                        break;
+                    /** @deprecated */
+                    case Sensor.TYPE_TEMPERATURE:
+                        name = "TEMPERATURE";
+                        break;
                 /* Samsung Sensors */
-                case Constants.TYPE_SAMSUNG_TILT_DETECTOR_V1:
-                    name = "SAMSUNG_TILT_DETECTOR_V1";
-                    break;
-                case Constants.TYPE_SCREEN_ORIENTATION_SENSOR_V3:
-                    name = "SCREEN_ORIENTATION_SENSOR_V3";
-                    break;
-                case Constants.TYPE_GRIP_SENSOR_V512_SEMTECH:
-                    name = "GRIP_SENSOR_V512_SEMTECH";
-                    break;
-                case Constants.TYPE_TMD4093_RGB_IR_SENSOR_V1:
-                    name = "TMD4093_RGB_IR_SENSOR_V1";
-                    break;
-                case Constants.TYPE_INTERRUPT_GYROSCOPE_SENSOR_V1:
-                    name = "INTERRUPT_GYROSCOPE_SENSOR_V1";
-                    break;
-                default:
-                    name = getString(R.string.sensor_unknown_type) + s.getType();
-                    break;
+                    case Constants.TYPE_SAMSUNG_TILT_DETECTOR_V1:
+                        name = "SAMSUNG_TILT_DETECTOR_V1";
+                        break;
+                    case Constants.TYPE_SCREEN_ORIENTATION_SENSOR_V3:
+                        name = "SCREEN_ORIENTATION_SENSOR_V3";
+                        break;
+                    case Constants.TYPE_GRIP_SENSOR_V512_SEMTECH:
+                        name = "GRIP_SENSOR_V512_SEMTECH";
+                        break;
+                    case Constants.TYPE_TMD4093_RGB_IR_SENSOR_V1:
+                        name = "TMD4093_RGB_IR_SENSOR_V1";
+                        break;
+                    case Constants.TYPE_INTERRUPT_GYROSCOPE_SENSOR_V1:
+                        name = "INTERRUPT_GYROSCOPE_SENSOR_V1";
+                        break;
+                    default:
+                        name = getString(R.string.sensor_unknown_type) + s.getType();
+                        break;
 
+                }
+                sensorNames.put(s.getType(), new String[]{name, "-+-"});
+                Log.i(TAG, getString(R.string.sensor_found) + (sensorNames.get(sensorNames.size() - 1)));
             }
-            sensorNames.put(s.getType(), new String[]{name, "-+-"});
-            Log.i(TAG, getString(R.string.sensor_found) + sensorNames.get(sensorNames.size() - 1));
+            // From API level 24 sensorNames.sort(String::compareToIgnoreCase);
+            // Collections.sort(sensorNames, comp); // String.CASE_INSENSITIVE_ORDER
+            ListView sensorListView = findViewById(R.id.listSensors);
+            SensorListAdapter sensorAdapter = new SensorListAdapter(this, sensorNames);
+            // new ArrayAdapter<String[]>(this, R.layout.onesensor, new int[] {R.id.oneSensorView, R.id.oneSensorValue}, sensorNames);
+            sensorAdapter.notifyDataSetChanged();
+            sensorListView.setAdapter(sensorAdapter);
         }
-        // From API level 24 sensorNames.sort(String::compareToIgnoreCase);
-        // Collections.sort(sensorNames, comp); // String.CASE_INSENSITIVE_ORDER
-        ListView sensorListView = (ListView) findViewById(R.id.listSensors);
-        SensorListAdapter sensorAdapter = new SensorListAdapter(this, sensorNames);
-        // new ArrayAdapter<String[]>(this, R.layout.onesensor, new int[] {R.id.oneSensorView, R.id.oneSensorValue}, sensorNames);
-        sensorAdapter.notifyDataSetChanged();
-        sensorListView.setAdapter(sensorAdapter);
+        catch (NullPointerException ex)
+        {
+            Log.i(TAG, getString(R.string.no_sensors));
+        }
     }
 
     private class SensorListAdapter extends BaseAdapter {
-        Activity activity;
+        final Activity activity;
         TextView nameView;
         TextView valueView;
-        SparseArray<String[]> sensorList;
+        final SparseArray<String[]> sensorList;
 
         public SensorListAdapter(Activity activity, SparseArray<String[]> sensorList) {
             super();
@@ -330,7 +332,7 @@ public class SensorsActivity
     @Override
     public Object onRetainNonConfigurationInstance() {
         Log.i(TAG, getMethodName());
-        return new Integer(getTaskId());
+        return getTaskId();
     }
 
     @Override

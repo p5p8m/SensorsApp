@@ -5,4 +5,5 @@
     <string name="sensor_unknown_type">Unbekannter Typ : </string>
     <string name="finishing">" Wird beendet"</string>
     <string name="num_sensors_fmt">%1$d Sensoren wurden gefunden.</string>
+    <string name="no_sensors">Keine Sensoren gefunden.</string>
 </resources>
